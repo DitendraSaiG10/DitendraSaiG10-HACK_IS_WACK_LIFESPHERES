@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h3>Tasks</h3>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div>{{ form.title.label }} {{ form.title() }} {{ form.submit() }}</div>
+  </form>
+
+  <h4>Your tasks</h4>
+  {% for t in tasks %}
+    <div class="task {{ 'done' if t.done else '' }}">
+      <form method="post" style="display:inline">
+        <input type="hidden" name="toggle" value="{{ t.id }}" />
+        <button type="submit">{{ 'Undo' if t.done else 'Done' }}</button>
+      </form>
+      <strong>{{ t.title }}</strong>
+      <form method="post" action="{{ url_for('delete_task', tid=t.id) }}" style="display:inline">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  {% else %}
+    <p>No tasks found.</p>
+  {% endfor %}
+{% endblock %}

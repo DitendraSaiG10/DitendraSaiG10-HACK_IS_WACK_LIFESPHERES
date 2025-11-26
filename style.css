@@ -1,0 +1,12 @@
+body{font-family:Inter,Arial,Helvetica,sans-serif;background:#f4f7fa;margin:0;padding:0}
+.container{max-width:900px;margin:30px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+header{display:flex;justify-content:space-between;align-items:center}
+nav a{margin-left:10px;text-decoration:none;color:#333}
+input,textarea,button{font-size:1rem;padding:8px;border-radius:6px;border:1px solid #ddd}
+button{cursor:pointer}
+.note, .task{padding:10px;border:1px solid #eee;margin:8px 0;border-radius:6px}
+.done{opacity:0.6;text-decoration:line-through}
+.flash{padding:8px;margin:10px 0;border-radius:6px}
+.flash-success{background:#e6ffed;color:#065f46}
+.flash-warning{background:#fff7e6;color:#92400e}
+.flash-danger{background:#ffe6e6;color:#9b1c1c}

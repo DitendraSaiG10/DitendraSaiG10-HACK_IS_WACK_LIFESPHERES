@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <h3>Notes</h3>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div>{{ form.title.label }} {{ form.title() }}</div>
+    <div>{{ form.body.label }} {{ form.body(rows=4) }}</div>
+    <div>{{ form.submit() }}</div>
+  </form>
+
+  <h4>Your notes</h4>
+  {% for n in notes %}
+    <div class="note">
+      <strong>{{ n.title }}</strong>
+      <p>{{ n.body }}</p>
+      <form method="post" action="{{ url_for('delete_note', nid=n.id) }}">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  {% else %}
+    <p>No notes yet.</p>
+  {% endfor %}
+{% endblock %}
