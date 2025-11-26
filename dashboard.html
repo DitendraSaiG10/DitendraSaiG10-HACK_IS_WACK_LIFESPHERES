@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+  <h3>Dashboard</h3>
+  <p>Quick utilities: calculator and timer below. Weather (sample):</p>
+
+  <h4>Weather</h4>
+  {% if weather %}
+    <p>Temperature: {{ weather.temperature }}°C — Wind: {{ weather.windspeed }} m/s</p>
+  {% else %}
+    <p>Weather currently unavailable (example integration shown in app.py).</p>
+  {% endif %}
+
+  <h4>Calculator</h4>
+  <input id="calc-in" placeholder="Type expression like 2+3*4" />
+  <button onclick="calc()">Compute</button>
+  <div id="calc-out"></div>
+
+  <h4>Timer (simple)</h4>
+  <input id="timer-min" placeholder="minutes" />
+  <button onclick="startTimer()">Start</button>
+  <div id="timer-out"></div>
+
+  <script>
+    function calc(){
+      try {
+        const v = document.getElementById("calc-in").value;
+        const res = Function('"use strict";return ('+v+')')();
+        document.getElementById("calc-out").innerText = res;
+      } catch(e){ document.getElementById("calc-out").innerText = "Error"; }
+    }
+    let timerInterval=null;
+    function startTimer(){
+      const min = parseFloat(document.getElementById("timer-min").value) || 0;
+      let sec = Math.round(min*60);
+      if(timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(()=>{
+        if(sec<=0){ clearInterval(timerInterval); document.getElementById("timer-out").innerText = "Time up!"; return; }
+        document.getElementById("timer-out").innerText = Math.floor(sec/60)+":"+("0"+(sec%60)).slice(-2);
+        sec--;
+      },1000);
+    }
+  </script>
+{% endblock %}
